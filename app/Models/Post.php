@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['user_id', 'title_post', 'slug_post', 'keyword_post', 'thumbnail_post', 'content_post', 'status_post'];
+    protected $fillable = [
+        'user_id',
+        'title_post',
+        'slug_post',
+        'keyword_post',
+        'thumbnail_post',
+        'content_post',
+        'status_post',
+        'is_editor_pick',
+        'editor_pick_priority'
+    ];
 
     // Relasi ke tabel users
     public function user()

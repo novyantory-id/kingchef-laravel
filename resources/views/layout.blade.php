@@ -318,33 +318,7 @@
                                         </div>
                                     </a>
                                 </li>
-
-                                <li class="slider-item">
-                                    <a href="#" class="slider-card">
-                                        <figure
-                                            class="slider-banner img-holder"
-                                            style="--width: ; --height: "
-                                        >
-                                            <img
-                                                src="{{ asset('assets/img/frontend/dendeng.jpg') }} "
-                                                width="507"
-                                                height="618"
-                                                loading="lazy"
-                                                alt="Masakan Pedas"
-                                                class="img-cover"
-                                            />
-                                        </figure>
-
-                                        <div class="slider-content">
-                                            <span class="slider-title"
-                                                >Masakan Pedas</span
-                                            >
-                                            <p class="slider-subtitle">
-                                                75 Articles
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                            </li>
                             </ul>
                         </div>
                     </div>
@@ -460,64 +434,51 @@
                             </div>
                         </li>
 
-                        @foreach ($editorPicked as $post)
-                        
                         <li>
                             <div class="card feature-card">
 
                                 <figure class="card-banner img-holder" style="--width:1602; --height:903;">
-
-                                    @if ($post->thumbnail_post)
-                                    <img src="{{ asset('storage/thumbnails/'.$post->thumbnail_post) }} " width="1602" height="903" loading="lazy" alt="Thumbnail" class="img-cover">  
-                                    @else
-                                    <img src="{{ asset('assets/img/frontend/rendang.jpg') }} " width="1602" height="903" loading="lazy" alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                                    @endif
+                                    <img src="{{ asset('assets/img/frontend/opor.jpg') }} " width="1602" height="903" loading="lazy" alt="Self-observation is the first step of inner unfolding" class="img-cover">
                                 </figure>
 
                                 <div class="card-content">
 
                                     <div class="card-wrapper">
                                         <div class="card-tag">
-
-                                            @foreach ($post->tags as $tag)    
-                                            <a href="{{ route('frontend.tag.show',$post->tags->first()->nama_tag) }}" class="span hover-2"># {{ $tag->nama_tag }}</a>
-                                            @endforeach
+                                            <a href="#" class="span hover-2">#Kuah</a>
+                                            <a href="#" class="span hover-2">#Bersantan</a>
                                         </div>
 
                                         <div class="wrapper">
                                             <ion-icon name="time" aria-hidden="true"></ion-icon>
         
-                                            <span class="span">{{ $post->created_at->diffForHumans() }}</span>
+                                            <span class="span">49 mins read</span>
                                         </div>
                                     </div>
 
                                     <h3 class="headline headline-3">
-                                        <a href="{{ route('frontend.article.show',$post->slug_post) }}" class="card-title hover-2">{{ $post->title_post }}</a>
+                                        <a href="#" class="card-title hover-2">Self-observation is the first step of inner unfolding</a>
                                     </h3>
 
                                     <div class="card-wrapper">
 
                                         <div class="profile-card">
-
-                                            @if($post->user->avatar)
-                                            <img src="{{ asset('storage/profile/'.$post->user->avatar) }} " width="48" height="48" loading="lazy" alt="Avatar" class="profile-banner">
-                                            @else
-                                            <img src="{{ asset('assets/img/frontend/default.png') }} " width="48" height="48" loading="lazy" alt="Avatar" class="profile-banner">
-                                            @endif
+                                            <img src="{{ asset('assets/img/frontend/author.jpg') }} " width="48" height="48" loading="lazy" alt="Novyantory" class="profile-banner">
 
                                             <div>
-                                                <p class="card-title">{{ $post->user->username }}</p>
+                                                <p class="card-title">Novyantory</p>
 
-                                                <p class="card-subtitle">{{ $post->created_at->format('d M Y') }}</p>
+                                                <p class="card-subtitle">25 Nov 2022</p>
                                             </div>
                                         </div>
 
                                         <a href="#" class="card-btn">Read More</a>
                                     </div>
                                 </div>
+
+                                
                             </div>
                         </li>
-                        @endforeach
 
                         
                     </ul>
@@ -664,59 +625,39 @@
                                     </div>
                                 </div>
                             </li>
-
-                            @foreach ($recents as $recent)
-                                
+        
                             <li>
                                 <div class="recent-post-card">
         
                                     <figure class="card-banner img-holder" style="--width:271; --height:258;">
-
-                                        @if ($recent->thumbnail_post)
-                                        <img src="{{ asset('storage/thumbnails/'.$recent->thumbnail_post) }} " width="271" height="258" loading="lazy" alt="Thumbnail" class="img-cover">    
-                                        @else
-                                        <img src="{{ asset('assets/img/frontend/blank.jpg') }} " width="271" height="258" loading="lazy" alt="Thumbnail" class="img-cover">
-
-                                        @endif
+                                        <img src="{{ asset('assets/img/frontend/rendang.jpg') }} " width="271" height="258" loading="lazy" alt="Resep Rendang Asli Padang" class="img-cover">
                                     </figure>
         
                                     <div class="card-content">
-                                        @if ($recent->categories->count() > 0)
-                                            
-                                        {{-- <a href="{{ route('frontend.categories.show', $recent->categories->first()->slug) }}" class="card-badge">
-                                            {{ $recent->categories->first()->name }}
-                                        </a> --}}
-
-                                        <a href="{{ route('frontend.category.show',$recent->categories->first()->slug_kategori) }}" class="card-badge">{{ $recent->categories->first()->nama_kategori }}</a>
-                                        
-                                        @endif
+                                        <a href="#" class="card-badge">Masakan Indonesia</a>
         
                                         <h3 class="headline headline-3 card-title">
-                                            <a href="#" class="link hover-2">{{ $recent->title_post }}</a>
+                                            <a href="#" class="link hover-2">Resep Rendang Asli Padang</a>
                                         </h3>
         
-                                        <p class="card-text">{{ Str::limit(strip_tags($recent->content_post),100) }}</p>
+                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatibus saepe sint eligendi id est repellendus eos eius quia architecto?</p>
         
                                         <div class="card-wrapper">
                                             <div class="card-tag">
-
-                                                @foreach ($recent->tags as $tag)
-                                                <a href="{{ route('frontend.tag.show',$recent->tags->first()->nama_tag) }}" class="span hover-2"># {{ $tag->nama_tag }}</a>
-                                                @endforeach
+                                                <a href="#" class="span hover-2"># Pedas</a>
+        
+                                                <a href="#" class="span hover-2"># Gurih</a>
                                             </div>
         
                                             <div class="wrapper">
                                                 <ion-icon name="time" aria-hidden="true"></ion-icon>
         
-                                               
-                                                <span class="span">{{ $recent->created_at->diffForHumans() }}</span>
+                                                <span class="span">2 hours read</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            @endforeach
-                            
                         </ul>
         
                         <nav aria-label="pagination" class="pagination">

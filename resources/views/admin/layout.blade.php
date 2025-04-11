@@ -181,6 +181,11 @@
               <i class="bi bi-circle"></i><span>My Post</span>
             </a>
           </li>
+          <li>
+            <a href="{{ route('admin.editor') }}">
+              <i class="bi bi-circle"></i><span>Editor Pick</span>
+            </a>
+          </li>
           
         </ul>
       </li><!-- End Components Nav -->

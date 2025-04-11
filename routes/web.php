@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EditorPickController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
@@ -18,6 +19,18 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ------------------------FRONTEND----------------------------
 Route::get('/', [FrontendController::class, 'index'])->name('index');
+
+// artikel view
+Route::get('/{slug}', [FrontendController::class, 'article'])
+    ->name('frontend.article.show');
+
+//categories
+Route::get('/category/{slug}', [CategoryController::class, 'show'])
+    ->name('frontend.category.show');
+
+// tags
+Route::get('/tag/{slug}', [TagController::class, 'show'])
+    ->name('frontend.tag.show');
 
 // ------------------------ADMIN ROLE----------------------------
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'role:admin'])->name('admin.dashboard');
@@ -49,6 +62,10 @@ Route::get('/admin/posts/all', [PostController::class, 'all'])->middleware(['aut
 Route::post('/admin/posts/add', [PostController::class, 'add'])->middleware(['auth', 'role:admin'])->name('admin.posts.add');
 Route::get('/admin/posts/edit/{slug}', [PostController::class, 'edit'])->middleware(['auth', 'role:admin'])->name('admin.posts.edit');
 Route::put('/admin/posts/edit/{slug}', [PostController::class, 'update'])->middleware(['auth', 'role:admin'])->name('admin.posts.update');
+
+// editor picks
+Route::get('/admin/editor', [EditorPickController::class, 'index'])->middleware(['auth', 'role:admin'])->name('admin.editor');
+Route::post('/admin/editor-picks/update', [EditorPickController::class, 'update'])->middleware(['auth', 'role:admin'])->name('admin.editor-picks.update');
 
 // upload
 Route::post('/upload-image', [MediaController::class, 'upload'])
