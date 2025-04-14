@@ -730,7 +730,8 @@ body.nav-active {
     line-height: var(--lineHeight-1);
 }
 
-.recent-post-card .card-badge {
+.recent-post-card .card-badge,
+.post-card .card-badge {
     background-color: var(--bg-prussian-blue);
     max-width: max-content;
     color: var(--text-white);
@@ -738,6 +739,10 @@ body.nav-active {
     padding: 4px 15px;
     border-radius: var(--radius-pill);
     transition: var(--transition-1);
+}
+
+.post-card .card-badge {
+    font-size: var(--fontSize-8);
 }
 
 .recent-post-card .card-badge:is(:hover, :focus-visible),
@@ -1251,6 +1256,15 @@ body.nav-active {
     * RECENT POST
     */
 
+    .article-post .container {
+        grid-template-columns: 1fr 0.6fr;
+        align-items: flex-start;
+    }
+
+    /** 
+    * RECENT POST
+    */
+
     .recent-post .container {
         grid-template-columns: 1fr 0.6fr;
         align-items: flex-start;
@@ -1353,3 +1367,101 @@ body.nav-active {
         padding-inline: 120px;
     }
 }
+
+/*---------------------------*\
+# Article
+\*---------------------------*/
+.article-post .container {
+    display: grid;
+    margin-block-start: 20px;
+    gap: 50px;
+}
+
+.post-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.post-card .card-banner {
+    width: 54px;
+    flex-shrink: 0;
+    border-radius: var(--radius-circle);
+}
+
+.post-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+    font-size: var(--fontSize-6);
+}
+
+.post-wrapper :is(.card-post, .wrapper) {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.popular-list > li:not(:last-child) .card-content {
+    border-block-end: 1px solid var(--border-prussian-blue);
+}
+
+.post-card .warpper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 10px;
+    font-size: var(--fontSize-6);
+    color: var(--text-slate-gray);
+}
+
+/* Style untuk konten dari Quill Editor */
+
+.post-content img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block;
+    margin: 1em auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Optional: Batasi lebar maksimum container */
+.ql-editor,
+.post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.ql-editor {
+  text-align: justify;
+  text-justify: inter-word; /* Untuk hasil yang lebih baik */
+  hyphens: auto; /* Memotong kata dengan tanda hubung jika perlu */
+}
+
+/* Reset counter untuk setiap ol */
+.ql-editor ol {
+    counter-reset: list-counter;
+    padding-left: 0;
+  }
+  
+  /* Increment counter per li */
+  .ql-editor ol li {
+    counter-increment: list-counter;
+    list-style: none;
+    position: relative;
+    margin-bottom: 0.5em;
+  }
+  
+  /* Tampilkan counter */
+  .ql-editor ol li::before {
+    content: counter(list-counter) ".";
+    position: absolute;
+    left: 1.3em;
+    width: 1em;
+    text-align: right;
+  }
+
+

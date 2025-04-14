@@ -386,7 +386,7 @@
                                         <div class="wrapper">
                                             <ion-icon name="time" aria-hidden="true"></ion-icon>
         
-                                            <span class="span">5 hours read</span>
+                                            <span class="span">5 hours ago</span>
                                         </div>
                                     </div>
 
@@ -432,7 +432,7 @@
                                         <div class="wrapper">
                                             <ion-icon name="time" aria-hidden="true"></ion-icon>
         
-                                            <span class="span">3 mins read</span>
+                                            <span class="span">3 mins ago</span>
                                         </div>
                                     </div>
 

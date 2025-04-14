@@ -31,4 +31,13 @@ class FrontendController extends Controller
         // ];
         return view('index', compact('recents', 'editorPicked'));
     }
+
+    public function article($slug)
+    {
+        $post = Post::with(['user', 'categories', 'tags'])
+            ->where('slug_post', $slug)
+            ->firstOrFail();
+
+        return view('post', compact('post'));
+    }
 }
