@@ -64,141 +64,68 @@
         </div>
 
         <div class="post-aside grid-list">
+
             <div class="card aside-card">
                 <h3 class="headline headline-2 aside-title">
-                    <span class="span">Similiar Posts</span>
+                    <span class="span">Similar Posts</span>
                 </h3>
 
                 <ul class="popular-list">
+                    @foreach ($similars as $similar)
                     <li>
                         <div class="popular-card">
                             <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                <img src="{{ asset('assets/img/frontend/dendeng.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
+                                <img src="{{ asset('storage/thumbnails/'.$similar->thumbnail_post) }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
                             </figure>
 
                             <div class="card-content">
                                 <h4 class="headline headline-4 card-title">
-                                    <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
+                                    <a href="{{ $similar->slug_post }}" class="link hover-2">{{ $similar->title_post }}</a>
                                 </h4>
 
                                 <div class="warpper">
-                                    <p class="card-subtitle">15 mins read</p>
+                                    <p class="card-subtitle">{{ $similar->created_at->diffForHumans() }}</p>
 
-                                    <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
+                                    <time datetime="2025-04-03" class="publish-date">{{ $similar->created_at->format('d M Y') }}</time>
                                 </div>
                             </div>
                         </div>
                     </li>
-
-                    <li>
-                        <div class="popular-card">
-                            <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                <img src="{{ asset('assets/img/frontend/opor.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-                                <h4 class="headline headline-4 card-title">
-                                    <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
-                                </h4>
-
-                                <div class="warpper">
-                                    <p class="card-subtitle">15 mins read</p>
-
-                                    <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="popular-card">
-                            <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                <img src="{{ asset('assets/img/frontend/rendang.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-                                <h4 class="headline headline-4 card-title">
-                                    <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
-                                </h4>
-
-                                <div class="warpper">
-                                    <p class="card-subtitle">15 mins read</p>
-
-                                    <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
-
+            
             <div class="card aside-card">
                 <h3 class="headline headline-2 aside-title">
                     <span class="span">Popular Posts</span>
                 </h3>
 
                 <ul class="popular-list">
+                    @foreach ($populars as $popular)
                     <li>
                         <div class="popular-card">
                             <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                <img src="{{ asset('assets/img/frontend/dendeng.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
+                                <img src="{{ asset('storage/thumbnails/'.$popular->thumbnail_post) }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
                             </figure>
 
                             <div class="card-content">
                                 <h4 class="headline headline-4 card-title">
-                                    <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
+                                    <a href="#" class="link hover-2">{{ $popular->title_post }}</a>
                                 </h4>
 
                                 <div class="warpper">
-                                    <p class="card-subtitle">15 mins read</p>
+                                    <p class="card-subtitle">{{ $popular->created_at->diffForHumans() }}</p>
 
-                                    <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
+                                    <time datetime="2025-04-03" class="publish-date">{{ $popular->created_at->format('d M Y') }}</time>
                                 </div>
                             </div>
                         </div>
                     </li>
-
-                    <li>
-                        <div class="popular-card">
-                            <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                <img src="{{ asset('assets/img/frontend/opor.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-                                <h4 class="headline headline-4 card-title">
-                                    <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
-                                </h4>
-
-                                <div class="warpper">
-                                    <p class="card-subtitle">15 mins read</p>
-
-                                    <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div class="popular-card">
-                            <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                <img src="{{ asset('assets/img/frontend/rendang.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
-                            </figure>
-
-                            <div class="card-content">
-                                <h4 class="headline headline-4 card-title">
-                                    <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
-                                </h4>
-
-                                <div class="warpper">
-                                    <p class="card-subtitle">15 mins read</p>
-
-                                    <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
+
+            
 
             <div class="card aside-card insta-card">
                 <a href="#" class="logo">

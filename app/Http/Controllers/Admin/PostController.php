@@ -37,6 +37,7 @@ class PostController extends Controller
                 'slug_post' => $post->slug_post, // Slug post
                 'content_post' => $post->content_post, // Konten post
                 'nama_kategori' => $post->categories->pluck('nama_kategori')->implode(', '), // Nama kategori dipisahkan koma
+                'nama_tag' => $post->tags->pluck('nama_tag')->implode(', '), // Nama tag dipisahkan koma
                 'status_post' => $post->status_post,
                 'created_at' => $post->created_at,
                 'updated_at' => $post->updated_at,
@@ -220,6 +221,9 @@ class PostController extends Controller
         $post = Post::where('slug_post', $slug)->firstOrFail();
         $disk = Storage::disk('public');
 
+        $statusChangedToPublish = ($request->input('action') === 'publish' && $post->status_post !== 'publish');
+        $isSavingDraft = ($request->input('action') === 'save_draft');
+
         $updateData = [
             'title_post' => $request->title_post,
             'content_post' => $request->content_post,
@@ -227,6 +231,11 @@ class PostController extends Controller
             'slug_post' => $request->slug_post,
             'status_post' => ($request->input('action') === 'publish') ? 'publish' : 'draft'
         ];
+
+        // Jika save draft atau pertama kali publish, update created_at
+        if ($isSavingDraft || $statusChangedToPublish) {
+            $updateData['created_at'] = now(); // atau Carbon::now()
+        }
 
         // Handle penghapusan thumbnail (jika tombol hapus diklik)
         if ($request->has('remove_thumbnail') && $request->remove_thumbnail) {

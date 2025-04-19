@@ -778,6 +778,11 @@ body.nav-active {
     transition: var(--transition-1);
 }
 
+.recent-post .btn {
+    margin-inline: auto;
+    margin-block-start: 30px;
+}
+
 .pagination {
     display: flex;
     justify-content: flex-start;
@@ -1425,6 +1430,18 @@ body.nav-active {
     margin: 1em auto;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.recent-post-card .card-title-categories {
+    margin-block-end: 20px;
+}
+
+.card-categories {
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    align-items: center;
+    font-size: var(--fontSize-6);
 }
 
 /* Optional: Batasi lebar maksimum container */

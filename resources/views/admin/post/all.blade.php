@@ -34,6 +34,7 @@
                     <th>Slug</th>
                     <th>Isi Konten</th>
                     <th>Kategori</th>
+                    <th>Tag</th>
                     <th>Status</th>
                     <th>Tanggal</th>
                 </tr>
@@ -51,8 +52,9 @@
                 <td>{{ $post['slug_post'] }}</td>
                 <td>{{ e(substr(strip_tags($post['content_post']), 0, 75)) . strlen($post['content_post']) > 100 ? e(substr(strip_tags($post['content_post']), 0, 75)) . '...' : '' }}</td>
                 <td>{{ $post['nama_kategori'] }}</td>
+                <td>{{ $post['nama_tag'] }}</td>
                 <td>{{ $post['status_post'] }}</td>
-                <td>{{ $post['updated_at']->format('d M Y H:i') }}</td>
+                <td>{{ $post['created_at']->format('d M Y H:i') }}</td>
             </tr>
               @endforeach
             </tbody>

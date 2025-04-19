@@ -522,7 +522,7 @@
                         
                     </ul>
 
-                    <a href="#" class="btn btn-secondary">
+                    <a href="{{ route('frontend.articles.show') }}" class="btn btn-secondary">
                         <span class="span">Show More Post</span>
 
                         <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
@@ -545,37 +545,18 @@
                     <p class="section-text">Most searched keywords</p>
 
                     <ul class="grid-list">
+                        @foreach ($tagPopulars as $tag)
+                            
+                        
                         <li>
                             <button class="card tag-btn">
                                 <img src="{{ asset('assets/img/frontend/goreng.png') }} " width="32" height="32" loading="lazy" alt="Goreng">
 
-                                <p class="btn-text">Goreng</p>
+                                <p class="btn-text">{{ $tag->nama_tag }}</p>
                             </button>
                         </li>
+                        @endforeach
                         
-                        <li>
-                            <button class="card tag-btn">
-                                <img src="{{ asset('assets/img/frontend/mie.png') }} " width="32" height="32" loading="lazy" alt="Mie">
-
-                                <p class="btn-text">Mie</p>
-                            </button>
-                        </li>
-
-                        <li>
-                            <button class="card tag-btn">
-                                <img src="{{ asset('assets/img/frontend/panggang.png') }} " width="32" height="32" loading="lazy" alt="Panggang">
-
-                                <p class="btn-text">Panggang</p>
-                            </button>
-                        </li>
-
-                        <li>
-                            <button class="card tag-btn">
-                                <img src="{{ asset('assets/img/frontend/pedas.png') }} " width="32" height="32" loading="lazy" alt="Pedas">
-
-                                <p class="btn-text">Pedas</p>
-                            </button>
-                        </li>
                     </ul>
                 </div>
             </section>
@@ -598,72 +579,6 @@
                         </p>
         
                         <ul class="grid-list">
-        
-                            <li>
-                                <div class="recent-post-card">
-        
-                                    <figure class="card-banner img-holder" style="--width:271; --height:258;">
-                                        <img src="{{ asset('assets/img/frontend/dendeng.jpg') }} " width="271" height="258" loading="lazy" alt="Resep Dendeng Balado Paling Empuk" class="img-cover">
-                                    </figure>
-        
-                                    <div class="card-content">
-                                        <a href="#" class="card-badge">Masakan Indonesia</a>
-        
-                                        <h3 class="headline headline-3 card-title">
-                                            <a href="#" class="link hover-2">Resep Dendeng Balado Paling Empuk</a>
-                                        </h3>
-        
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatibus saepe sint eligendi id est repellendus eos eius quia architecto?</p>
-        
-                                        <div class="card-wrapper">
-                                            <div class="card-tag">
-                                                <a href="#" class="span hover-2"># Pedas</a>
-        
-                                                <a href="#" class="span hover-2"># Gurih</a>
-                                            </div>
-        
-                                            <div class="wrapper">
-                                                <ion-icon name="time" aria-hidden="true"></ion-icon>
-        
-                                                <span class="span">3 mins read</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-        
-                            <li>
-                                <div class="recent-post-card">
-        
-                                    <figure class="card-banner img-holder" style="--width:271; --height:258;">
-                                        <img src="{{ asset('assets/img/frontend/opor.jpg') }} " width="271" height="258" loading="lazy" alt="Resep Opor Ayam Untuk Lebaran" class="img-cover">
-                                    </figure>
-        
-                                    <div class="card-content">
-                                        <a href="#" class="card-badge">Masakan Indonesia</a>
-        
-                                        <h3 class="headline headline-3 card-title">
-                                            <a href="#" class="link hover-2">Resep Opor Ayam Untuk Lebaran</a>
-                                        </h3>
-        
-                                        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptatibus saepe sint eligendi id est repellendus eos eius quia architecto?</p>
-        
-                                        <div class="card-wrapper">
-                                            <div class="card-tag">
-                                                <a href="#" class="span hover-2"># Berkuah</a>
-        
-                                                <a href="#" class="span hover-2"># Sarapan</a>
-                                            </div>
-        
-                                            <div class="wrapper">
-                                                <ion-icon name="time" aria-hidden="true"></ion-icon>
-        
-                                                <span class="span">49 mins read</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
 
                             @foreach ($recents as $recent)
                                 
@@ -692,7 +607,7 @@
                                         @endif
         
                                         <h3 class="headline headline-3 card-title">
-                                            <a href="#" class="link hover-2">{{ $recent->title_post }}</a>
+                                            <a href="{{ route('frontend.article.show',$recent->slug_post) }}" class="link hover-2">{{ $recent->title_post }}</a>
                                         </h3>
         
                                         <p class="card-text">{{ Str::limit(strip_tags($recent->content_post),100) }}</p>
@@ -719,7 +634,7 @@
                             
                         </ul>
         
-                        <nav aria-label="pagination" class="pagination">
+                        {{-- <nav aria-label="pagination" class="pagination">
                             <a href="#" class="pagination-btn" aria-label="previous page">
                                 <ion-icon
                                             name="arrow-back"
@@ -739,7 +654,14 @@
                                         ></ion-icon>
                             </a>
                             
-                        </nav>
+                        </nav> --}}
+
+                        <a href="{{ route('frontend.articles.show') }}" class="btn btn-secondary">
+                            <span class="span">Show More Post</span>
+    
+                            <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+                        </a>
+
                     </div>
         
                     <div class="post-aside grid-list">
@@ -749,69 +671,33 @@
                             </h3>
         
                             <ul class="popular-list">
+        
+                                @foreach ($populars as $popular)
                                 <li>
                                     <div class="popular-card">
                                         <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                            <img src="{{ asset('assets/img/frontend/dendeng.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
+                                            <img src="{{ asset('storage/thumbnails/'.$popular->thumbnail_post) }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
                                         </figure>
         
                                         <div class="card-content">
                                             <h4 class="headline headline-4 card-title">
-                                                <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
+                                                <a href="#" class="link hover-2">{{ $popular->title_post }}</a>
                                             </h4>
         
                                             <div class="warpper">
-                                                <p class="card-subtitle">15 mins read</p>
+                                                <p class="card-subtitle">{{ $popular->created_at->diffForHumans() }}</p>
         
-                                                <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
+                                                <time datetime="2025-04-03" class="publish-date">{{ $popular->created_at->format('d M Y') }}</time>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-        
-                                <li>
-                                    <div class="popular-card">
-                                        <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                            <img src="{{ asset('assets/img/frontend/opor.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
-                                        </figure>
-        
-                                        <div class="card-content">
-                                            <h4 class="headline headline-4 card-title">
-                                                <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
-                                            </h4>
-        
-                                            <div class="warpper">
-                                                <p class="card-subtitle">15 mins read</p>
-        
-                                                <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-        
-                                <li>
-                                    <div class="popular-card">
-                                        <figure class="card-banner img-holder" style="--width:64; --height:64;">
-                                            <img src="{{ asset('assets/img/frontend/rendang.jpg') }} " alt="" width="64" height="64" loading="lazy" class="img-cover">
-                                        </figure>
-        
-                                        <div class="card-content">
-                                            <h4 class="headline headline-4 card-title">
-                                                <a href="#" class="link hover-2">Creating is a privilege but it's also a gift</a>
-                                            </h4>
-        
-                                            <div class="warpper">
-                                                <p class="card-subtitle">15 mins read</p>
-        
-                                                <time datetime="2025-04-03" class="publish-date">15 April 2022</time>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                @endforeach
+                                
                             </ul>
                         </div>
         
-                        <div class="card aside-card">
+                        {{-- <div class="card aside-card">
                             <h3 class="headline headline-2 aside-title">
                                 <span class="span">Last Comment</span>
                             </h3>
@@ -855,7 +741,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
         
                         <div class="card aside-card insta-card">
                             <a href="#" class="logo">

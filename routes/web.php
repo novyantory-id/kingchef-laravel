@@ -20,17 +20,25 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 // ------------------------FRONTEND----------------------------
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 
-// artikel view
-Route::get('/{slug}', [FrontendController::class, 'article'])
-    ->name('frontend.article.show');
+// all articles view
+Route::get('/articles', [FrontendController::class, 'articles'])
+    ->name('frontend.articles.show');
 
-//categories
-Route::get('/category/{slug}', [CategoryController::class, 'show'])
+// post by categories
+Route::get('/category/{slug}', [FrontendController::class, 'category'])
     ->name('frontend.category.show');
 
-// tags
-Route::get('/tag/{slug}', [TagController::class, 'show'])
+// post by tags
+Route::get('/tag/{slug}', [FrontendController::class, 'tag'])
     ->name('frontend.tag.show');
+
+// post by users
+Route::get('/author/{username}', [FrontendController::class, 'author'])
+    ->name('frontend.author.show');
+
+// article view
+Route::get('/{slug}', [FrontendController::class, 'article'])
+    ->name('frontend.article.show');
 
 // ------------------------ADMIN ROLE----------------------------
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'role:admin'])->name('admin.dashboard');

@@ -44,6 +44,12 @@ class Post extends Model
     // post_id: Foreign key yang merujuk ke tabel posts.
     // category_id: Foreign key yang merujuk ke tabel categories.
 
+    public function postTags()
+    {
+        //one-to-many
+        return $this->hasMany(Post_tags::class);
+    }
+
     public function tags()
     {
         //many-to-many

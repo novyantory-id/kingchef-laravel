@@ -22,9 +22,9 @@ class Post_categories extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function tag()
-    {
-        // many-to-one
-        return $this->belongsTo(Tag::class);
-    }
+    // public function tag()
+    // {
+    //     // many-to-one
+    //     return $this->belongsTo(Tag::class);
+    // }
 }
