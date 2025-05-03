@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\Writer\DashboardController as WriterDashboardController;
+use App\Http\Controllers\Writer\PostController as WriterPostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -110,3 +111,10 @@ Route::get('/test-file', function () {
 //     ->name('upload.image');
 // ------------------------WRITER ROLE----------------------------
 Route::get('/writer/dashboard', [WriterDashboardController::class, 'index'])->middleware(['auth', 'role:writer'])->name('writer.dashboard');
+
+// posts
+Route::get('/writer/posts', [WriterPostController::class, 'index'])->middleware(['auth', 'role:writer'])->name('writer.posts');
+Route::get('/writer/posts/all', [WriterPostController::class, 'all'])->middleware(['auth', 'role:writer'])->name('writer.posts.all');
+Route::post('/writer/posts/add', [WriterPostController::class, 'add'])->middleware(['auth', 'role:writer'])->name('writer.posts.add');
+Route::get('/writer/posts/edit/{slug}', [WriterPostController::class, 'edit'])->middleware(['auth', 'role:writer'])->name('writer.posts.edit');
+Route::put('/writer/posts/edit/{slug}', [WriterPostController::class, 'update'])->middleware(['auth', 'role:writer'])->name('writer.posts.update');

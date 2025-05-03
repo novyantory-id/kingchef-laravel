@@ -238,113 +238,47 @@
 
                         <div class="slider" data-slider>
                             <ul class="slider-list" data-slider-container>
-                                <li class="slider-item">
-                                    <a href="#" class="slider-card">
-                                        <figure
-                                            class="slider-banner img-holder"
-                                            style="--width: ; --height: "
-                                        >
-                                            <img
-                                                src="{{ asset('assets/img/frontend/rendang.jpg') }} "
-                                                width="507"
-                                                height="618"
-                                                loading="lazy"
-                                                alt="Masakan Nusantara"
-                                                class="img-cover"
-                                            />
-                                        </figure>
-
-                                        <div class="slider-content">
-                                            <span class="slider-title"
-                                                >Masakan Nusantara</span
-                                            >
-                                            <p class="slider-subtitle">
-                                                38 Articles
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li class="slider-item">
-                                    <a href="#" class="slider-card">
-                                        <figure
-                                            class="slider-banner img-holder"
-                                            style="--width: ; --height: "
-                                        >
-                                            <img
-                                                src="{{ asset('assets/img/frontend/dendeng.jpg') }} "
-                                                width="507"
-                                                height="618"
-                                                loading="lazy"
-                                                alt="Masakan Pedas"
-                                                class="img-cover"
-                                            />
-                                        </figure>
-
-                                        <div class="slider-content">
-                                            <span class="slider-title"
-                                                >Masakan Pedas</span
-                                            >
-                                            <p class="slider-subtitle">
-                                                75 Articles
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
                                 
+                                @foreach ($mostPopularCategories as $category)
                                 <li class="slider-item">
                                     <a href="#" class="slider-card">
                                         <figure
                                             class="slider-banner img-holder"
                                             style="--width: ; --height: "
                                         >
+                                        @if ($category->posts->isNotEmpty() && $category->posts[0]->thumbnail_post)
                                             <img
-                                                src="{{ asset('assets/img/frontend/opor.jpg') }} "
-                                                width="507"
-                                                height="618"
-                                                loading="lazy"
-                                                alt="Masakan Kuah"
-                                                class="img-cover"
+                                            src="{{ asset('assets/img/frontend/rendang.jpg') }} "
+                                            width="507"
+                                            height="618"
+                                            loading="lazy"
+                                            alt="Masakan Nusantara"
+                                            class="img-cover"
                                             />
+                                        @else
+                                        <img
+                                            src="{{ asset('assets/img/frontend/rendang.jpg') }} "
+                                            width="507"
+                                            height="618"
+                                            loading="lazy"
+                                            alt="Masakan Nusantara"
+                                            class="img-cover"
+                                            />
+                                        @endif
+                                            
                                         </figure>
 
                                         <div class="slider-content">
                                             <span class="slider-title"
-                                                >Masakan Kuah</span
+                                                >{{ $category->nama_kategori }}</span
                                             >
                                             <p class="slider-subtitle">
-                                                12 Articles
+                                                {{ $category->posts_count }} Articles
                                             </p>
                                         </div>
                                     </a>
                                 </li>
-
-                                <li class="slider-item">
-                                    <a href="#" class="slider-card">
-                                        <figure
-                                            class="slider-banner img-holder"
-                                            style="--width: ; --height: "
-                                        >
-                                            <img
-                                                src="{{ asset('assets/img/frontend/dendeng.jpg') }} "
-                                                width="507"
-                                                height="618"
-                                                loading="lazy"
-                                                alt="Masakan Pedas"
-                                                class="img-cover"
-                                            />
-                                        </figure>
-
-                                        <div class="slider-content">
-                                            <span class="slider-title"
-                                                >Masakan Pedas</span
-                                            >
-                                            <p class="slider-subtitle">
-                                                75 Articles
-                                            </p>
-                                        </div>
-                                    </a>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -487,7 +421,7 @@
                                         <div class="wrapper">
                                             <ion-icon name="time" aria-hidden="true"></ion-icon>
         
-                                            <span class="span">{{ $post->created_at->diffForHumans() }}</span>
+                                            <span class="span">{{ $post->published_at->diffForHumans() }}</span>
                                         </div>
                                     </div>
 
@@ -508,7 +442,7 @@
                                             <div>
                                                 <p class="card-title">{{ $post->user->username }}</p>
 
-                                                <p class="card-subtitle">{{ $post->created_at->format('d M Y') }}</p>
+                                                <p class="card-subtitle">{{ $post->published_at->format('d M Y') }}</p>
                                             </div>
                                         </div>
 
@@ -624,7 +558,7 @@
                                                 <ion-icon name="time" aria-hidden="true"></ion-icon>
         
                                                
-                                                <span class="span">{{ $recent->created_at->diffForHumans() }}</span>
+                                                <span class="span">{{ $recent->published_at->diffForHumans() }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -685,9 +619,9 @@
                                             </h4>
         
                                             <div class="warpper">
-                                                <p class="card-subtitle">{{ $popular->created_at->diffForHumans() }}</p>
+                                                <p class="card-subtitle">{{ $popular->published_at->diffForHumans() }}</p>
         
-                                                <time datetime="2025-04-03" class="publish-date">{{ $popular->created_at->format('d M Y') }}</time>
+                                                <time datetime="2025-04-03" class="publish-date">{{ $popular->published_at->format('d M Y') }}</time>
                                             </div>
                                         </div>
                                     </div>

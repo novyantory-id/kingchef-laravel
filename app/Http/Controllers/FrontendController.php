@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
 {
@@ -32,10 +33,22 @@ class FrontendController extends Controller
             ->limit(5)
             ->get();
 
+
         //dari tag model
         $tagPopulars = Tag::popular()->get();
 
-        return view('index', compact('recents', 'populars', 'editorPicked', 'tagPopulars'));
+        //jumlah artikel posts berdasarkan jumlah kategori terbanyak
+        $mostPopularCategories = Category::withCount('posts')
+            ->with(['posts' => function ($query) {
+                $query->select('posts.id', 'posts.thumbnail_post', 'posts.created_at')
+                    ->latest()
+                    ->limit(1);
+            }])
+            ->orderByDesc('posts_count')
+            ->limit(4) // Sesuai jumlah item slider
+            ->get();
+
+        return view('index', compact('recents', 'populars', 'editorPicked', 'tagPopulars', 'mostPopularCategories'));
     }
 
     public function articles(Request $request)
@@ -202,34 +215,89 @@ class FrontendController extends Controller
     //     }
     // }
 
-    //versi lengkap dengan optimasi
+    //tanpa device_id
+    // protected function catatPostView(Post $post)
+    // {
+    //     if ($this->isBotRequest()) return;
+
+    //     $ip = $this->getClientIp();
+
+    //     // Cek apakah IP pernah melihat artikel ini (kapanpun, tanpa batas waktu)
+    //     $alreadyViewed = PostView::where('post_id', $post->id)
+    //         ->where('ip_address', $ip)
+    //         ->exists();
+
+    //     if (!$alreadyViewed) {
+    //         DB::transaction(function () use ($post, $ip) {
+    //         PostView::create([
+    //             'post_id' => $post->id,
+    //                 'ip_address' => $ip,
+    //                 'user_agent' => mb_substr(request()->userAgent() ?? 'Unknown', 0, 500)
+    //         ]);
+
+    //             $post->increment('view_post');
+    //         });
+    //     }
+    // }
+
+    //hanya device_id
+    // protected function catatPostView(Post $post)
+    // {
+    //     if ($this->isBotRequest()) return;
+
+    //     $ip = $this->getClientIp();
+    //     $deviceId = $this->getDeviceFingerprint();
+    //     $cacheKey = "post_view_{$post->id}_{$deviceId}"; // Gunakan deviceId bukan IP
+
+    //     if (!Cache::has($cacheKey)) {
+    //         DB::transaction(function () use ($post, $ip, $deviceId, $cacheKey) {
+    //             $alreadyViewed = PostView::where('post_id', $post->id)
+    //                 ->where('device_id', $deviceId) // Gunakan device_id
+    //                 ->exists();
+
+    //             if (!$alreadyViewed) {
+    //                 PostView::create([
+    //                     'post_id' => $post->id,
+    //                     'ip_address' => $ip, // Simpan IP untuk referensi
+    //                     'device_id' => $deviceId,
+    //                     'user_agent' => mb_substr(request()->userAgent() ?? 'Unknown', 0, 500)
+    //                 ]);
+
+    //                 $post->increment('view_post');
+    //                 Cache::forever($cacheKey, true);
+    //             }
+    //         });
+    //     }
+    // }
+
+    //kombinasi ip + device_id
     protected function catatPostView(Post $post)
     {
-        //FILTER BOT
-        if ($this->isBotRequest()) {
-            return;
-        }
+        if ($this->isBotRequest()) return;
 
-        //DAPATKAN IDENTITAS PENGGUNA
         $ip = $this->getClientIp();
-        $userAgent = request()->userAgent() ?? 'Unknown';
+        $deviceId = $this->generateDeviceId(); // Gabungkan IP + fingerprint browser
 
-        // CACHE KEY UNIK
-        $cacheKey = 'postview_' . $post->id . '_' . md5($ip . $userAgent);
+        // Cek apakah perangkat+IP sudah pernah melihat
+        $alreadyViewed = PostView::where('post_id', $post->id)
+            ->where(function ($query) use ($ip, $deviceId) {
+                $query->where('ip_address', $ip)
+                    ->orWhere('device_id', $deviceId);
+            })
+            ->exists();
 
-        //PROSES JIKA BELUM ADA DI CACHE
-        if (!Cache::has($cacheKey)) {
+        if (!$alreadyViewed) {
             PostView::create([
                 'post_id' => $post->id,
-                'ip_address' => $ip ?: '0.0.0.0',
-                'user_agent' => mb_substr($userAgent, 0, 500), // Batasi 500 karakter
+                'ip_address' => $ip,
+                'device_id' => $deviceId,
+                'user_agent' => request()->userAgent()
             ]);
 
-            //tambahkan satu di kolom view_post di tabel posts
-            $post->increment('view_post');
-
-            // SET CACHE 24 JAM
-            Cache::put($cacheKey, true, now()->addDay());
+            // $post->increment('view_post');
+            $post->timestamps = false;  // Matikan sementara auto-update timestamp
+            $post->increment('view_post');  // Tambah view tanpa ubah `updated_at`
+            $post->timestamps = true;   // Nyalakan kembali
         }
     }
 
@@ -239,6 +307,24 @@ class FrontendController extends Controller
         return preg_match(
             '/bot|crawl|spider|facebook|Google|Yandex|slurp/i',
             request()->userAgent()
+        );
+    }
+
+    protected function getDeviceFingerprint()
+    {
+        $userAgent = request()->userAgent() ?? 'unknown';
+        $acceptLanguage = request()->header('Accept-Language') ?? 'unknown';
+        $platform = request()->header('Sec-CH-UA-Platform') ?? 'unknown';
+
+        return md5($userAgent . $acceptLanguage . $platform);
+    }
+
+    protected function generateDeviceId()
+    {
+        return md5(
+            request()->userAgent() .
+                request()->header('Accept-Language') .
+                request()->ip()
         );
     }
 

@@ -30,10 +30,10 @@ class AuthController extends Controller
             } elseif ($role === 'writer') {
                 return redirect()->route('writer.dashboard');
             } else {
-                return redirect('/')->withError('Anda tidak memiliki akses');
+                return redirect('/login')->withError('Anda tidak memiliki akses');
             }
         } else {
-            return redirect('/')->withError('Username atau Password Salah');
+            return redirect('/login')->withError('Username atau Password Salah');
         }
     }
 
@@ -42,6 +42,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 }

@@ -53,7 +53,7 @@
 
         <header class="header" data-header>
             <div class="container">
-                <a href="#" class="logo">
+                <a href="{{ route('index') }}" class="logo">
                     <img
                         src="{{ asset('assets/img/kingchef.png') }} "
                         height="100"
@@ -88,7 +88,7 @@
                     <ul class="navbar-list">
                         <li>
                             <a
-                                href="#hero"
+                                href="{{ url('/') }}#hero"
                                 class="navbar-link hover-1"
                                 data-nav-toggler
                                 >Home</a
@@ -96,7 +96,7 @@
                             </li>
                             <li>
                                 <a
-                                href="#topics"
+                                href="{{ url('/') }}#topics"
                                 class="navbar-link hover-1"
                                 data-nav-toggler
                                 >Topics</a
@@ -104,7 +104,7 @@
                             </li>
                             <li>
                                 <a
-                                href="#featured"
+                                href="{{ url('/') }}#featured"
                                 class="navbar-link hover-1"
                                 data-nav-toggler
                                 >Featured</a
@@ -112,7 +112,7 @@
                             </li>
                             <li>
                                 <a
-                                href="#recent"
+                                href="{{ url('/') }}#recent"
                                 class="navbar-link hover-1"
                                 data-nav-toggler
                                 >Recent Post</a
@@ -120,7 +120,7 @@
                             </li>
                             <li>
                                 <a
-                                href="#contact"
+                                href="{{ url('/') }}#contact"
                                 class="navbar-link hover-1"
                                 data-nav-toggler
                                 >Contact</a

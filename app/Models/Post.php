@@ -15,7 +15,12 @@ class Post extends Model
         'content_post',
         'status_post',
         'is_editor_pick',
-        'editor_pick_priority'
+        'editor_pick_priority',
+        'published_at'
+    ];
+
+    protected $casts = [
+        'published_at' => 'datetime' // Konversi otomatis ke Carbon
     ];
 
     // Relasi ke tabel users

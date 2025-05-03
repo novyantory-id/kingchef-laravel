@@ -130,7 +130,7 @@
 
                             <div class="card-content">
                                 <h4 class="headline headline-4 card-title">
-                                    <a href="#" class="link hover-2">{{ $popular->title_post }}</a>
+                                    <a href="{{ route('frontend.article.show',$post->slug_post) }}" class="link hover-2">{{ $popular->title_post }}</a>
                                 </h4>
 
                                 <div class="warpper">

@@ -21,13 +21,32 @@
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }} " rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }} " rel="stylesheet">
   <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }} " rel="stylesheet">
-  <link href="{{ asset('assets/vendor/quill/quill.snow.css') }} " rel="stylesheet">
-  <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }} " rel="stylesheet">
+
+  {{-- <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> --}}
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }} " rel="stylesheet">
   <link href="{{ asset('assets/vendor/simple-datatables/style.css') }} " rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }} " rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('assets/css/alert.css') }}">
+
+  {{-- Sweetalert2 --}}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  {{-- Editor --}}
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+
+  {{-- datatables --}}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+
+{{-- Setelah hapus berhasil --}}
+
+  <style>
+    .ql-media i {
+    font-size: 16px;
+    }
+  </style>
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -51,21 +70,21 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
+    {{-- <div class="search-bar">
       <form class="search-form d-flex align-items-center" method="POST" action="#">
         <input type="text" name="query" placeholder="Search" title="Enter search keyword">
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
-    </div><!-- End Search Bar -->
+    </div><!-- End Search Bar --> --}}
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
+        {{-- <li class="nav-item d-block d-lg-none">
           <a class="nav-link nav-icon search-bar-toggle " href="#">
             <i class="bi bi-search"></i>
           </a>
-        </li><!-- End Search Icon-->
+        </li><!-- End Search Icon--> --}}
 
         
 
@@ -148,12 +167,12 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="{{ route('writer.posts.all') }}">
               <i class="bi bi-circle"></i><span>All Posts</span>
             </a>
           </li>
           <li>
-            <a href="components-accordion.html">
+            <a href="{{ route('writer.posts') }}">
               <i class="bi bi-circle"></i><span>My Post</span>
             </a>
           </li>
@@ -198,16 +217,6 @@
 
   <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
     @yield('content')
 
   </main>
@@ -235,13 +244,23 @@
   <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
   <script src="{{ asset('assets/vendor/chart.js/chart.umd.js') }} "></script>
   <script src="{{ asset('assets/vendor/echarts/echarts.min.js') }} "></script>
-  <script src="{{ asset('assets/vendor/quill/quill.js') }} "></script>
+  {{-- <script src="{{ asset('assets/vendor/quill/quill.js') }} "></script> --}}
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  {{-- <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script> --}}
+  
   <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }} "></script>
   <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }} "></script>
   <script src="{{ asset('assets/vendor/php-email-form/validate.js') }} "></script>
 
+  {{-- Script Quill --}}
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }} "></script>
+  <script src="{{ asset('assets/js/master.js') }}"></script>
+  <script src="{{ asset('assets/js/quill.js') }}"></script>
+  {{-- <script src="{{ asset('assets/js/media-library.js') }}"></script> --}}
 
 </body>
 

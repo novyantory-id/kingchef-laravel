@@ -9,6 +9,7 @@ class PostView extends Model
     protected $fillable = [
         'post_id',
         'ip_address',
+        'device_id',
         'user_agent'
     ]; // Izinkan semua kolom diisi
 
