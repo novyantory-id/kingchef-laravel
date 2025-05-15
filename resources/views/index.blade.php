@@ -158,11 +158,11 @@
                         </h1>
 
                         <p class="hero-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores est vero odit a culpa possimus hic, nostrum neque, quibusdam adipisci cum distinctio reprehenderit animi obcaecati!
+                            King Chef shares authentic and innovative recipes through a web platform, inspiring food lovers with traditional and fusion dishes while building a creative and eco-conscious cooking community.
                         </p>
 
                         <div class="input-wrapper">
-                            <input type="email" name="email_address" placeholder="Type your email address" id="" class="input-field" required>
+                            <input id="userEmail" type="email" name="email_address" placeholder="Type your email address" id="" class="input-field" required>
 
                             <button class="btn btn-primary">
                                 <span class="span">Subscribe</span>
@@ -248,20 +248,20 @@
                                         >
                                         @if ($category->posts->isNotEmpty() && $category->posts[0]->thumbnail_post)
                                             <img
-                                            src="{{ asset('assets/img/frontend/rendang.jpg') }} "
+                                            src="{{ asset('storage/categorytag/'.$category->gambar_kategori) }} "
                                             width="507"
                                             height="618"
                                             loading="lazy"
-                                            alt="Masakan Nusantara"
+                                            alt="category img"
                                             class="img-cover"
                                             />
                                         @else
                                         <img
-                                            src="{{ asset('assets/img/frontend/rendang.jpg') }} "
+                                            src="{{ asset('assets/img/frontend/default-food.jpg') }} "
                                             width="507"
                                             height="618"
                                             loading="lazy"
-                                            alt="Masakan Nusantara"
+                                            alt="category img"
                                             class="img-cover"
                                             />
                                         @endif
@@ -302,98 +302,6 @@
 
                     <ul class="feature-list">
 
-                        <li>
-                            <div class="card feature-card">
-
-                                <figure class="card-banner img-holder" style="--width:1602; --height:903;">
-                                    <img src="{{ asset('assets/img/frontend/dendeng.jpg') }} " width="1602" height="903" loading="lazy" alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <div class="card-wrapper">
-                                        <div class="card-tag">
-                                            <a href="#" class="span hover-2">#Pedas</a>
-                                            <a href="#" class="span hover-2">#Gurih</a>
-                                        </div>
-
-                                        <div class="wrapper">
-                                            <ion-icon name="time" aria-hidden="true"></ion-icon>
-        
-                                            <span class="span">5 hours ago</span>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="headline headline-3">
-                                        <a href="#" class="card-title hover-2">Self-observation is the first step of inner unfolding</a>
-                                    </h3>
-
-                                    <div class="card-wrapper">
-
-                                        <div class="profile-card">
-                                            <img src="{{ asset('assets/img/frontend/author.jpg') }} " width="48" height="48" loading="lazy" alt="Novyantory" class="profile-banner">
-
-                                            <div>
-                                                <p class="card-title">Novyantory</p>
-
-                                                <p class="card-subtitle">25 Nov 2022</p>
-                                            </div>
-                                        </div>
-
-                                        <a href="#" class="card-btn">Read More</a>
-                                    </div>
-                                </div>
-
-                                
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="card feature-card">
-
-                                <figure class="card-banner img-holder" style="--width:1602; --height:903;">
-                                    <img src="{{ asset('assets/img/frontend/rendang.jpg') }} " width="1602" height="903" loading="lazy" alt="Self-observation is the first step of inner unfolding" class="img-cover">
-                                </figure>
-
-                                <div class="card-content">
-
-                                    <div class="card-wrapper">
-                                        <div class="card-tag">
-                                            <a href="#" class="span hover-2">#Pedas</a>
-                                            <a href="#" class="span hover-2">#Gurih</a>
-                                        </div>
-
-                                        <div class="wrapper">
-                                            <ion-icon name="time" aria-hidden="true"></ion-icon>
-        
-                                            <span class="span">3 mins ago</span>
-                                        </div>
-                                    </div>
-
-                                    <h3 class="headline headline-3">
-                                        <a href="#" class="card-title hover-2">Self-observation is the first step of inner unfolding</a>
-                                    </h3>
-
-                                    <div class="card-wrapper">
-
-                                        <div class="profile-card">
-                                            <img src="{{ asset('assets/img/frontend/author.jpg') }} " width="48" height="48" loading="lazy" alt="Novyantory" class="profile-banner">
-
-                                            <div>
-                                                <p class="card-title">Novyantory</p>
-
-                                                <p class="card-subtitle">25 Nov 2022</p>
-                                            </div>
-                                        </div>
-
-                                        <a href="#" class="card-btn">Read More</a>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </li>
-
                         @foreach ($editorPicked as $post)
                         
                         <li>
@@ -414,7 +322,7 @@
                                         <div class="card-tag">
 
                                             @foreach ($post->tags as $tag)    
-                                            <a href="{{ route('frontend.tag.show',$post->tags->first()->nama_tag) }}" class="span hover-2"># {{ $tag->nama_tag }}</a>
+                                            <a href="{{ route('frontend.tag.show',$post->tags->first()->nama_tag) }}" class="span hover-2">#{{ $tag->nama_tag }} </a>
                                             @endforeach
                                         </div>
 
@@ -440,7 +348,7 @@
                                             @endif
 
                                             <div>
-                                                <p class="card-title">{{ $post->user->username }}</p>
+                                                <p class="card-title"><a href="{{ route('frontend.author.show',$post->user->username) }}" class="card-title hover-2">{{ $post->user->username }}</a></p>
 
                                                 <p class="card-subtitle">{{ $post->published_at->format('d M Y') }}</p>
                                             </div>
@@ -456,11 +364,11 @@
                         
                     </ul>
 
-                    <a href="{{ route('frontend.articles.show') }}" class="btn btn-secondary">
+                    {{-- <a href="{{ route('frontend.articles.show') }}" class="btn btn-secondary">
                         <span class="span">Show More Post</span>
 
                         <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                    </a>
+                    </a> --}}
                 </div>
 
                 <img src="{{ asset('assets/svg/shadow-3.svg') }} " width="500" height="1500" loading="lazy" alt="" class="feature-bg">
@@ -550,7 +458,7 @@
                                             <div class="card-tag">
 
                                                 @foreach ($recent->tags as $tag)
-                                                <a href="{{ route('frontend.tag.show',$recent->tags->first()->nama_tag) }}" class="span hover-2"># {{ $tag->nama_tag }}</a>
+                                                <a href="{{ route('frontend.tag.show',$recent->tags->first()->nama_tag) }}" class="span hover-2">#{{ $tag->nama_tag }} </a>
                                                 @endforeach
                                             </div>
         
@@ -689,15 +597,59 @@
                             <ul class="insta-list">
                                 <li>
                                     <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
-                                        <img src="{{ asset('assets/img/frontend/instagram.svg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                        <img src="{{ asset('assets/img/frontend/ig-1.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
                                     </a>
                                 </li>
         
                                 <li>
                                     <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
-                                        <img src="{{ asset('assets/img/frontend/instagram.svg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                        <img src="{{ asset('assets/img/frontend/ig-2.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
                                     </a>
                                 </li>
+
+                                <li>
+                                    <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
+                                        <img src="{{ asset('assets/img/frontend/ig-3.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
+                                        <img src="{{ asset('assets/img/frontend/ig-4.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
+                                        <img src="{{ asset('assets/img/frontend/ig-5.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
+                                        <img src="{{ asset('assets/img/frontend/ig-6.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
+                                        <img src="{{ asset('assets/img/frontend/ig-7.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
+                                        <img src="{{ asset('assets/img/frontend/ig-8.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
+                                        <img src="{{ asset('assets/img/frontend/ig-9.jpg') }} " width="276" height="277" alt="insta-post" class="img-cover">
+                                    </a>
+                                </li>
+
+
                             </ul>
                         </div>
                     </div>
@@ -722,14 +674,14 @@
                             </a>
 
                             <p class="footer-text">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur maxime unde optio cupiditate deleniti qui consequatur, nam ab inventore suscipit magnam harum dolores, libero id voluptatem laudantium, quibusdam quo ducimus.
+                                The character names, website name, and theme on this platform are purely fictional. The content shared is not the original work of the website owner.
                             </p>
 
                             <p class="footer-list-title">Address</p>
 
                             <address class="footer-text address">
                                 Padat Karya Street
-                                South Lampung, SL 35362
+                                South Lampung, ID 35362
                             </address>
                         </div>
 
@@ -767,23 +719,23 @@
                             <p class="footer-list-title">Newsletter</p>
 
                             <p class="footer-text">
-                                Sign up to be first to receive the latest stories inspiring us, case studies, and industry news.
+                                Please contact us if you have any suggestions regarding dishes or interesting culinary ideas to share.
                             </p>
 
                             <div class="input-wrapper">
-                                <input type="text" name="name" placeholder="Your name" id="" class="input-field" autocomplete="off" required>
+                                <input type="text" name="name" placeholder="Your name" id="fullName" class="input-field" autocomplete="off" required>
 
                                 <ion-icon name="person" aria-hidden="true"></ion-icon>
                             </div>
 
                             <div class="input-wrapper">
-                                <input type="email" name="email_address" placeholder="Your name" id="" class="input-field" autocomplete="off" required>
+                                <input type="email" name="email_address" placeholder="Your email" id="userEmail" class="input-field" autocomplete="off" required>
 
                                 <ion-icon name="mail" aria-hidden="true"></ion-icon>
                             </div>
 
-                            <a href="#" class="btn btn-primary">
-                                <span class="span">Subscribe</span>
+                            <a href="#" class="btn btn-primary" onclick="sendEmail()">
+                                <span class="span">Contact Us</span>
 
                                 <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>    
                             </a>
@@ -797,33 +749,38 @@
                             &copy; Developed by <a href="#" class="copyright-link">Novyantory</a>
                         </p>
 
-                        <ul class="social-list">
+                        <p class="copyright">
+                            &copy; Designed by <a href="https://youtube.com/@codewithsadee" class="copyright-link">codewithsadee</a>
+                        </p>
 
-                            <li>
-                                <a href="#" class="social-link">
-                                    <ion-icon name="logo-twitter"></ion-icon>
-
-                                    <span class="span">Twitter</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#" class="social-link">
-                                    <ion-icon name="logo-instagram"></ion-icon>
-
-                                    <span class="span">Instagram</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#" class="social-link">
-                                    <ion-icon name="logo-github"></ion-icon>
-
-                                    <span class="span">Github</span>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
+
+                    <ul class="social-list">
+
+                        <li>
+                            <a href="https://x.com/novyantory" class="social-link">
+                                <ion-icon name="logo-twitter"></ion-icon>
+
+                                <span class="span">Twitter</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://instagram.com/novyantory" class="social-link">
+                                <ion-icon name="logo-instagram"></ion-icon>
+
+                                <span class="span">Instagram</span>
+                            </a>
+                        </li>
+
+                        {{-- <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-github"></ion-icon>
+
+                                <span class="span">Github</span>
+                            </a>
+                        </li> --}}
+                    </ul>
                 </div>
             </div>
          </footer>
@@ -840,5 +797,24 @@
         <script src="{{ asset('assets/js/frontend-main.js') }} "></script>
 
         <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+
+        <script>
+            function sendEmail() {
+                let userEmail = document.getElementById("userEmail");
+                let fullName = document.getElementById("fullName").value;
+                let myEmail = "bolongsandal42@gmail.com";
+                let subject = `${fullName} - My Question`;
+                let body = "Silahkan masukkan pesan anda...";
+
+                if (userEmail) {
+                    let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${myEmail}&su=${encodeURIComponent(
+                    subject
+                    )}&body=${encodeURIComponent(body)}&bbc=${userEmail}`;
+                    window.open(mailtoLink, "_blank");
+                } else {
+                    alert("Masukin emailnya dulu, Sob!");
+                }
+            }
+        </script>
     </body>
 </html>

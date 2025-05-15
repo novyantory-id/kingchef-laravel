@@ -212,23 +212,23 @@
                             <p class="footer-list-title">Newsletter</p>
 
                             <p class="footer-text">
-                                Sign up to be first to receive the latest stories inspiring us, case studies, and industry news.
+                                Please contact us if you have any suggestions regarding dishes or interesting culinary ideas to share.
                             </p>
 
                             <div class="input-wrapper">
-                                <input type="text" name="name" placeholder="Your name" id="" class="input-field" autocomplete="off" required>
+                                <input type="text" name="name" placeholder="Your name" id="fullName" class="input-field" autocomplete="off" required>
 
                                 <ion-icon name="person" aria-hidden="true"></ion-icon>
                             </div>
 
                             <div class="input-wrapper">
-                                <input type="email" name="email_address" placeholder="Your name" id="" class="input-field" autocomplete="off" required>
+                                <input type="email" name="email_address" placeholder="Your email" id="userEmail" class="input-field" autocomplete="off" required>
 
                                 <ion-icon name="mail" aria-hidden="true"></ion-icon>
                             </div>
 
-                            <a href="#" class="btn btn-primary">
-                                <span class="span">Subscribe</span>
+                            <a href="#" class="btn btn-primary" onclick="sendEmail()">
+                                <span class="span">Contact Us</span>
 
                                 <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>    
                             </a>
@@ -260,13 +260,13 @@
                                 </a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="#" class="social-link">
                                     <ion-icon name="logo-github"></ion-icon>
 
                                     <span class="span">Github</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </div>
@@ -287,5 +287,24 @@
         <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+
+        <script>
+            function sendEmail() {
+                let userEmail = document.getElementById("userEmail");
+                let fullName = document.getElementById("fullName").value;
+                let myEmail = "bolongsandal42@gmail.com";
+                let subject = `${fullName} - My Question`;
+                let body = "Silahkan masukkan pesan anda...";
+
+                if (userEmail) {
+                    let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${myEmail}&su=${encodeURIComponent(
+                    subject
+                    )}&body=${encodeURIComponent(body)}&bbc=${userEmail}`;
+                    window.open(mailtoLink, "_blank");
+                } else {
+                    alert("Masukin emailnya dulu, Sob!");
+                }
+            }
+        </script>
     </body>
 </html>

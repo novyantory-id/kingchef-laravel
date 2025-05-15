@@ -146,30 +146,6 @@
                 </ul>
             </div>
 
-
-            <div class="card aside-card insta-card">
-                <a href="#" class="logo">
-                    <img src="{{ asset('assets/img/kingchef.png') }} " width="119" height="37" loading="lazy" alt="King Chef">
-                </a>
-
-                <p class="card-text">
-                    Follow us on instagram
-                </p>
-
-                <ul class="insta-list">
-                    <li>
-                        <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
-                            <img src="{{ asset('assets/img/frontend/instagram.svg') }} " width="276" height="277" alt="insta-post" class="img-cover">
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" style="--width:276; --height:277;" class="insta-post img-holder">
-                            <img src="{{ asset('assets/img/frontend/instagram.svg') }} " width="276" height="277" alt="insta-post" class="img-cover">
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </section>

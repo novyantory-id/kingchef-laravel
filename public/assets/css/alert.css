@@ -1,12 +1,12 @@
-@media (max-width: 767px) {
-    /* alert */
-    .alert-custom {
+/* alert */
+.alert-custom {
         position: fixed;
         top: 20px;
         right: 20px;
         transform: none;
+        font-size: 12px;
         width: auto;
-        padding: 15px;
+        padding: 10px;
         border-radius: 10px 0px 10px 0px;
         color: white;
         display: none;
@@ -31,4 +31,3 @@
         left: 0;
         transition: width 5s linear;
     }
-}

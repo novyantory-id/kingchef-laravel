@@ -17,7 +17,7 @@
     <div class="card-body">
         <div class="d-flex justify-content-between align-items-center">
           <h5 class="card-title">Post Lists</h5>
-          <form action="/writer/posts/add" method="POST">
+          <form action="/admin/posts/add" method="POST">
             @csrf
             <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Add Post</button>
           </form>
@@ -46,7 +46,7 @@
                 <th scope="row">{{ $loop->iteration }}</th>
                 <td class="title-cell">
                     @if(auth()->user()->role === 'admin' || (auth()->user()->role === 'writer' && auth()->user()->id === $post->user_id))
-                      <a href="{{ route('writer.posts.edit', $post->slug_post) }}" class="editable-title">
+                      <a href="{{ route('admin.posts.edit', $post->slug_post) }}" class="editable-title">
                         {{ $post->title_post }}
                       </a>
                     @else

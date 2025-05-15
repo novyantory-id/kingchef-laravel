@@ -18,7 +18,7 @@
     <h5 class="card-title">Add Category</h5>
 
     <!-- Browser Default Validation -->
-    <form action="" method="POST" class="row g-3">
+    <form action="" method="POST" class="row g-3" enctype="multipart/form-data">
       @csrf
       <div class="col-md-4">
         <label for="validationDefault01" class="form-label">Category Name</label>
@@ -33,6 +33,16 @@
         @error('slug_kategori')
             <div class="text-danger">{{ $message }}</div>
         @enderror
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">
+          Category Img
+        </label>
+        <label for="file-input" class="category-file-upload">
+          Pilih File
+        </label>
+        <input type="file" name="gambar_kategori" id="file-input" class="file-input"/>
+        <span id="category-file-name">Tidak ada file yang dipilih</span>
       </div>
       <div class="col-12">
         <button class="btn btn-primary" type="submit">Add Data</button>
@@ -78,5 +88,20 @@
   </div>
 
   <script src="{{ asset('assets/js/master.js') }}"></script>
+
+  <script>
+    const fileInput = document.getElementById("file-input");
+            const fileNameSpan = document.getElementById("category-file-name");
+
+            if (fileInput && fileNameSpan) {
+                fileInput.addEventListener("change", function () {
+                    if (this.files && this.files.length > 0) {
+                        fileNameSpan.textContent = this.files[0].name;
+                    } else {
+                        fileNameSpan.textContent = "Tidak ada file yang dipilih";
+                    }
+                });
+            }
+  </script>
     
 @endsection

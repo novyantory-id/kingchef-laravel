@@ -11,8 +11,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -91,43 +91,26 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{ asset('assets/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            @if (auth()->user()->avatar)
+            <img src="{{ asset('storage/profile/'.auth()->user()->avatar) }}" alt="Profile" class="rounded-circle">
+            @else
+            <img src="{{ asset('assets/img/frontend/default.png') }}" alt="Profile" class="rounded-circle">
+            @endif
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->fullname }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>{{ auth()->user()->fullname }}</h6>
+              <span>{{ auth()->user()->role }}</span>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="{{ route('admin.settings') }}">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
               </a>
             </li>
             <li>
@@ -197,29 +180,18 @@
         </a>
       </li><!-- End Profile Page Nav -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="#">
           <i class="bx bx-comment-detail"></i>
           <span>Comments</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bx bx-wrench"></i><span>Settings</span><i class="bi bi-chevron-down ms-auto"></i>
+        <a class="nav-link collapsed" href="{{ route('admin.settings') }}">
+          <i class="bx bx-comment-detail"></i>
+          <span>Settings</span>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Profile</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Change Password</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
+      </li><!-- End Profile Page Nav -->
 
       <li class="nav-heading">Master</li>
 
@@ -252,18 +224,19 @@
 
   <main id="main" class="main">
 
-    @if(@session('success'))
-    <div id="alert-success" class="alert-custom alert-successs">
-      <i class="bi bi-check-circle"></i> {{ session('success') }}
-      <div class="progress-bar"></div>
-    </div>
-    @endif
     @if(@session('failed'))
     <div id="alert-failed" class="alert-custom alert-failed">
       <span class="fw-bold">X</span> {{ session('failed') }}
             <div class="progress-bar"></div>
     </div>
     @endif
+    @if(@session('success'))
+    <div id="alert-success" class="alert-custom alert-successs">
+      <i class="bi bi-check-circle"></i> {{ session('success') }}
+      <div class="progress-bar"></div>
+    </div>
+    @endif
+    
 
     @yield('content')
 

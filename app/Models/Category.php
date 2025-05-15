@@ -11,7 +11,8 @@ class Category extends Model
 
     protected $fillable = [
         'nama_kategori',
-        'slug_kategori'
+        'slug_kategori',
+        'gambar_kategori'
     ];
 
     // Relasi ke tabel post_categories

@@ -316,7 +316,7 @@ body.nav-active {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    align-items: center;
+    /* align-items: center; */
     font-size: var(--fontSize-6);
     margin-block: 20px;
 }
@@ -324,7 +324,12 @@ body.nav-active {
 .card-wrapper :is(.card-tag, .wrapper) {
     display: flex;
     gap: 3px;
-    align-items: center;
+    /* align-items: center; */
+    flex-wrap: wrap;
+    max-width: 50%;
+    min-height: 2.8em; /* Tinggi untuk 2 baris */
+    max-height: 2.8em; /* Tinggi untuk 2 baris */
+    /* line-height: 1.4em; Sesuaikan dengan line-height Anda */
 }
 
 /*---------------------------*\
@@ -631,6 +636,22 @@ body.nav-active {
     color: var(--text-slate-gray);
 }
 
+.feature .headline-3 .card-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Batasi maksimal 2 baris */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    /* Atur tinggi minimal dan maksimal */
+    min-height: 2.8em; /* Tinggi untuk 2 baris */
+    max-height: 2.8em; /* Tinggi untuk 2 baris */
+    line-height: 1.4em; /* Sesuaikan dengan line-height Anda */
+    
+    /* Pastikan link mengisi seluruh area */
+    display: block;
+}
+
 .feature .profile-card .card-title {
     font-weight: var(--weight-bold);
 }
@@ -756,7 +777,7 @@ body.nav-active {
 }
 
 .recent-post-card .card-tag {
-    gap: 15px;
+    gap: 3px;
     color: var(--text-slate-gray);
 }
 
@@ -947,7 +968,8 @@ body.nav-active {
 
 .footer-bottom {
     border-block-start: 1px solid var(--border-prussian-blue);
-    padding-block: 50px;
+    padding-block-start: 50px;
+    padding-block-end: 20px;
 }
 
 .copyright {
@@ -966,6 +988,7 @@ body.nav-active {
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
+    padding-block-end: 50px;
 }
 
 .social-link {
@@ -1159,7 +1182,7 @@ body.nav-active {
 * responsive for large than 768px screen
 */
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     /* 
     * CUSTOM PROPERTY
     */

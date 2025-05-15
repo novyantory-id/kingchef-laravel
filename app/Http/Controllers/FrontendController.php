@@ -56,7 +56,7 @@ class FrontendController extends Controller
         $recents = Post::with(['categories', 'tags'])
             ->where('status_post', 'publish')
             ->orderBy('created_at', 'desc')
-            ->paginate(1);
+            ->paginate(6);
         // ->limit(5)
         // ->get();
 
@@ -88,7 +88,7 @@ class FrontendController extends Controller
         })
             ->where('status_post', 'publish')
             ->latest()
-            ->paginate(1);
+            ->paginate(5);
 
         // Jika request AJAX (saat klik load more)
         if ($request->ajax()) {
@@ -118,7 +118,7 @@ class FrontendController extends Controller
         })
             ->where('status_post', 'publish')
             ->latest()
-            ->paginate(1);
+            ->paginate(5);
 
         // Jika request AJAX (saat klik load more)
         if ($request->ajax()) {
@@ -146,7 +146,7 @@ class FrontendController extends Controller
         $posts = Post::where('user_id', $user->id)
             ->where('status_post', 'publish')
             ->latest()
-            ->paginate(1);
+            ->paginate(5);
 
         // Jika request AJAX (saat klik load more)
         if ($request->ajax()) {

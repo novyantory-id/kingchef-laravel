@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EditorPickController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\Writer\DashboardController as WriterDashboardController;
 use App\Http\Controllers\Writer\PostController as WriterPostController;
+use App\Http\Controllers\Writer\SettingController as WriterSettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +45,11 @@ Route::get('/{slug}', [FrontendController::class, 'article'])
 
 // ------------------------ADMIN ROLE----------------------------
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'role:admin'])->name('admin.dashboard');
+
+//settings
+Route::get('/admin/settings', [SettingController::class, 'index'])->middleware(['auth', 'role:admin'])->name('admin.settings');
+Route::put('/admin/settings/profile', [SettingController::class, 'updateProfile'])->middleware(['auth', 'role:admin'])->name('admin.settings.profile');
+Route::put('/admin/settings/password', [SettingController::class, 'updatePassword'])->middleware(['auth', 'role:admin'])->name('admin.settings.password');
 
 // category
 Route::get('/admin/categories', [CategoryController::class, 'index'])->middleware(['auth', 'role:admin'])->name('admin.category');
@@ -118,3 +125,8 @@ Route::get('/writer/posts/all', [WriterPostController::class, 'all'])->middlewar
 Route::post('/writer/posts/add', [WriterPostController::class, 'add'])->middleware(['auth', 'role:writer'])->name('writer.posts.add');
 Route::get('/writer/posts/edit/{slug}', [WriterPostController::class, 'edit'])->middleware(['auth', 'role:writer'])->name('writer.posts.edit');
 Route::put('/writer/posts/edit/{slug}', [WriterPostController::class, 'update'])->middleware(['auth', 'role:writer'])->name('writer.posts.update');
+
+//settings
+Route::get('/writer/settings', [WriterSettingController::class, 'index'])->middleware(['auth', 'role:writer'])->name('writer.settings');
+Route::put('/writer/settings/profile', [WriterSettingController::class, 'updateProfile'])->middleware(['auth', 'role:writer'])->name('writer.settings.profile');
+Route::put('/writer/settings/password', [WriterSettingController::class, 'updatePassword'])->middleware(['auth', 'role:writer'])->name('writer.settings.password');

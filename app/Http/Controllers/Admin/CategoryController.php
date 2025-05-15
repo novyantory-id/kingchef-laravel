@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -36,7 +37,13 @@ class CategoryController extends Controller
                 'slug_kategori' => [
                     'required',
                     'max:25',
-                ]
+                ],
+                'gambar_kategori' => [
+                    'nullable',
+                    'image',
+                    'mimes:jpeg,png,jpg,gif',
+                    'max:1024'
+                ],
             ],
             [
                 'nama_kategori.required' => 'Nama kategori wajib diisi',
@@ -44,18 +51,26 @@ class CategoryController extends Controller
                 'nama_kategori.max' => 'Nama tidak boleh lebih dari 25 karakter',
                 'slug_kategori.max' => 'Slug tidak boleh lebih dari 25 karakter',
                 'slug_kategori.required' => 'Slug kategori wajib diisi',
+                'gambar_kategori.max' => 'Maksimal gambar 1MB'
             ]
         );
 
-        $category = Category::create($validated);
-
-        if (!$category) {
-            return redirect()->back()->with('failed', 'Terjadi kesalahan saat menyimpan data!');
-        } else {
-            return redirect()->back()->with('success', 'Data kategori berhasil disimpan!');
+        // Handle upload gambar
+        if ($request->hasFile('gambar_kategori')) {
+            $file = $request->file('gambar_kategori');
+            $fileName = $file->hashName();
+            $file->storeAs('categorytag', $fileName, 'public');
         }
 
-        return redirect('admin.categories');
+        // Simpan data ke database
+        Category::create([
+            'nama_kategori' => $validated['nama_kategori'],
+            'slug_kategori' => $validated['slug_kategori'],
+            'gambar_kategori' => $fileName ?? null
+        ]);
+
+        return redirect()->route('admin.category')
+            ->with('success', 'Kategori baru berhasil ditambahkan!');
     }
 
     public function edit($id)
@@ -82,6 +97,16 @@ class CategoryController extends Controller
                 'slug_kategori' => [
                     'required',
                     'max:25',
+                ],
+                'gambar_kategori' => [
+                    'nullable',
+                    'image',
+                    'mimes:jpeg,png,jpg,gif',
+                    'max:1024'
+                ],
+                'gambar_lama' => [
+                    'nullable',
+                    'string'
                 ]
             ],
             [
@@ -90,13 +115,58 @@ class CategoryController extends Controller
                 'nama_kategori.max' => 'Nama tidak boleh lebih dari 25 karakter',
                 'slug_kategori.max' => 'Slug tidak boleh lebih dari 25 karakter',
                 'slug_kategori.required' => 'Slug kategori wajib diisi',
+                'gambar_kategori.max' => 'Maksimal gambar 1MB'
             ]
         );
 
-        $update = Category::where('id', $id)
-            ->update($validated);
+        // Cari kategori yang akan diupdate
+        $category = Category::findOrFail($id);
 
-        return redirect()->route('admin.category')->with('success', 'Data berhasil diupdate!');
+        // Update data dasar
+        $category->nama_kategori = $validated['nama_kategori'];
+        $category->slug_kategori = $validated['slug_kategori'];
+
+        // Handle gambar
+        if ($request->hasFile('gambar_kategori')) {
+            $disk = Storage::disk('public');
+
+            // Hapus gambar lama jika ada
+            if (!empty($validated['gambar_lama'])) {
+                $oldImagePath = 'categorytag/' . $validated['gambar_lama'];
+
+                if ($disk->exists($oldImagePath)) {
+                    $disk->delete($oldImagePath);
+                }
+            }
+            // Simpan gambar baru
+            $file = $request->file('gambar_kategori');
+            $fileName = $file->hashName();
+            $file->storeAs('categorytag', $fileName, 'public');
+
+            // Update path gambar di database
+            $category->gambar_kategori = $fileName;
+        }
+
+        // Simpan perubahan
+        $category->save();
+
+        return redirect()->route('admin.category')
+            ->with('success', 'Kategori berhasil diupdate!');
+
+        // if ($validated->fails()) {
+        //     return redirect()->route('admin.categories')
+        //         ->with('failed', 'Ada yang salah, periksa!.')
+        //         ->withErrors($validated);
+        // }
+
+        // return redirect()->route('admin.categories')
+        //     ->with('success', 'Kategori berhasil diupdate!');
+
+        // $update = Category::where('id', $id)
+        //     ->update($validated);
+
+        // return redirect()->route('admin.category')->with('success', 'Data berhasil diupdate!');
+
     }
 
     public function delete($id)
