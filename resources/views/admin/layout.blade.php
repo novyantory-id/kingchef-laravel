@@ -6,12 +6,12 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Dashboard - Blogger Laravel</title>
+  <title>{{ $title }} - King Chef</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/img/img-icon.png') }}" rel="icon">
   <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -63,9 +63,8 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{{ asset('assets/img/logo.png') }}" alt="">
-        <span class="d-none d-lg-block">LavBlogger</span>
+      <a href="index.html" class="d-flex align-items-center">
+        <img src="{{ asset('assets/img/kingchef.png') }}" alt="" width="70">
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

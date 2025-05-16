@@ -33,7 +33,7 @@ class PostController extends Controller
     public function all()
     {
         $data = [
-            'title' => 'Post',
+            'title' => 'All Post',
             'breadcrumb1' => 'Home',
             'breadcrumb2' => 'All Post Lists',
         ];
@@ -89,6 +89,12 @@ class PostController extends Controller
 
     public function edit($slug)
     {
+        $data = [
+            'title' => 'Edit Post',
+            'breadcrumb1' => 'Home',
+            'breadcrumb2' => 'Edit Post Lists',
+        ];
+
         // Ambil post berdasarkan slug
         $post = Post::where('slug_post', $slug)->firstOrFail();
 
@@ -101,7 +107,7 @@ class PostController extends Controller
         $tags = Tag::all();
 
         // Tampilkan view edit dengan data post
-        return view('writer.post.edit', compact('post', 'categories', 'tags'));
+        return view('writer.post.edit', $data, compact('post', 'categories', 'tags'));
     }
 
     public function update(Request $request, $slug)

@@ -108,13 +108,17 @@ class PostController extends Controller
 
     public function edit($slug)
     {
+
+        $data = [
+            'title' => 'Edit Post',
+        ];
         // Ambil post berdasarkan slug
         $post = Post::where('slug_post', $slug)->firstOrFail();
         $categories = Category::all();
         $tags = Tag::all();
 
         // Tampilkan view edit dengan data post
-        return view('admin.post.edit', compact('post', 'categories', 'tags'));
+        return view('admin.post.edit', $data, compact('post', 'categories', 'tags'));
     }
 
     // public function update(Request $request, $slug)
