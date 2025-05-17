@@ -16,12 +16,16 @@ use App\Http\Controllers\Writer\SettingController as WriterSettingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
+Route::get('/', function () {
+    return response()->json(['status' => 'ok']);
+});
+
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login_action']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ------------------------FRONTEND----------------------------
-Route::get('/', [FrontendController::class, 'index'])->name('index');
+// Route::get('/', [FrontendController::class, 'index'])->name('index');
 
 // all articles view
 Route::get('/articles', [FrontendController::class, 'articles'])
