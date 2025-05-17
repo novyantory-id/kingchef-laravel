@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/ping', function () {
-    return response()->json(['status' => 'ok', 'db' => DB::connection()->getPdo() ? 'connected' : 'failed']);
-});
+Route::get('/ping', fn() => response()->json(['status' => 'ok']));
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login_action']);
