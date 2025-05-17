@@ -13,11 +13,12 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\Writer\DashboardController as WriterDashboardController;
 use App\Http\Controllers\Writer\PostController as WriterPostController;
 use App\Http\Controllers\Writer\SettingController as WriterSettingController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-Route::get('/', function () {
-    return response()->json(['status' => 'ok']);
+Route::get('/ping', function () {
+    return response()->json(['status' => 'ok', 'db' => DB::connection()->getPdo() ? 'connected' : 'failed']);
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -25,7 +26,7 @@ Route::post('/login', [AuthController::class, 'login_action']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // ------------------------FRONTEND----------------------------
-// Route::get('/', [FrontendController::class, 'index'])->name('index');
+Route::get('/', [FrontendController::class, 'index'])->name('index');
 
 // all articles view
 Route::get('/articles', [FrontendController::class, 'articles'])
