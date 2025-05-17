@@ -18,7 +18,24 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
 Route::get('/ping', function () {
-    return response()->json(['status' => 'ok', 'db' => DB::connection()->getPdo() ? 'connected' : 'failed']);
+    try {
+        $pdo = DB::connection()->getPdo();
+        return response()->json([
+            'status' => 'ok',
+            'db' => 'connected',
+            'db_host' => env('DB_HOST')
+        ]);
+    } catch (\Exception $e) {
+        // Force debug mode sementara
+        return response()->json([
+            'error' => $e->getMessage(),
+            'config' => [
+                'host' => env('DB_HOST'),
+                'port' => env('DB_PORT'),
+                'database' => env('DB_DATABASE')
+            ]
+        ], 500);
+    }
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
