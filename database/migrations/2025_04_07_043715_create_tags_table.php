@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_tag');
             $table->string('slug_tag');
-            $table->string('img_tag');
             $table->timestamps();
         });
     }

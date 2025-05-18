@@ -28,6 +28,16 @@ class UserSeeder extends Seeder
 
         DB::table('users')->insert([
             [
+                'username' => 'admin',
+                'fullname' => 'Administrator',
+                'email' => 'admin@gmail.com',
+                'password' => bcrypt('123456'),
+                'nohp' => '0897222232222',
+                'avatar' => '48E9UQkTr2Sg0Xfaq2xk5zSDTf1F6HZWXHnrhGHA.jpg',
+                'role' => 'admin',
+                'status_user' => 'aktif'
+            ],
+            [
                 'username' => 'budiono',
                 'fullname' => 'Budiono Siregar',
                 'email' => 'budiono@gmail.com',

@@ -53,7 +53,6 @@
         <thead>
           <tr>
             <th scope="col">No</th>
-            <th scope="col">Img</th>
             <th scope="col">Tag</th>
             <th scope="col">Slug</th>
             <th scope="col">Action</th>
@@ -63,10 +62,6 @@
           @foreach ($tags as $tag)
           <tr>
             <th scope="row">{{ $loop->iteration }}</th>
-            <td>
-                <img src="" alt="">
-                <img src="{{ asset('storage/categorytag/'.$tag->img_tag) }}" alt="" class="img-fluid responsive-img">
-            </td>
             <td>{{ $tag->nama_tag }}</td>
             <td>{{ $tag->slug_tag }}</td>
             <td>

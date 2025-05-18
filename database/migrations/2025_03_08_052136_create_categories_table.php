@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kategori');
             $table->string('slug_kategori');
-            $table->string('thumbnail_post');
             $table->timestamps();
         });
     }

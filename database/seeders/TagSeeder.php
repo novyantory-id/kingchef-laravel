@@ -17,7 +17,34 @@ class TagSeeder extends Seeder
             [
                 'nama_tag' => 'panggang',
                 'slug_tag' => 'panggang',
-                'img_tag' => 'pedas.png'
+            ],
+            [
+                'nama_tag' => 'manis',
+                'slug_tag' => 'manis',
+            ],
+            [
+                'nama_tag' => 'tumis',
+                'slug_tag' => 'tumis',
+            ],
+            [
+                'nama_tag' => 'kukus',
+                'slug_tag' => 'kukus',
+            ],
+            [
+                'nama_tag' => 'rebus',
+                'slug_tag' => 'rebus',
+            ],
+            [
+                'nama_tag' => 'bakar',
+                'slug_tag' => 'bakar',
+            ],
+            [
+                'nama_tag' => 'asam',
+                'slug_tag' => 'asam',
+            ],
+            [
+                'nama_tag' => 'gurih',
+                'slug_tag' => 'gurih',
             ],
         ]);
     }

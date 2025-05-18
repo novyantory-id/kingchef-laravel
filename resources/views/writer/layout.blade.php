@@ -63,7 +63,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="d-flex align-items-center">
+      <a href="{{ route('writer.dashboard') }}" class="d-flex align-items-center">
         <img src="{{ asset('assets/img/kingchef.png') }}" alt="" width="70">
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -137,7 +137,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="index.html">
+        <a class="nav-link " href="{{ route('writer.dashboard') }}">
           <i class="bx bx-home"></i>
           <span>Dashboard</span>
         </a>
