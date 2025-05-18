@@ -15,8 +15,9 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'nama_kategori' => 'makanan',
-                'slug_kategori' => 'makanan',
+                'nama_kategori' => 'Makanan Utama',
+                'slug_kategori' => 'makanan-utama',
+                'gambar_kategori' => 'gambar-kategori.jpg'
             ],
         ]);
     }
