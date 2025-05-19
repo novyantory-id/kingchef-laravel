@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('title_post');
             $table->string('slug_post');
-            $table->string('keyword_post');
-            $table->string('thumbnail_post');
-            $table->text('content_post');
+            $table->string('keyword_post')->nullable();
+            $table->string('thumbnail_post')->nullable();
+            $table->text('content_post')->nullable();
             $table->enum('status_post', ['draft', 'publish']);
             $table->timestamps();
         });
